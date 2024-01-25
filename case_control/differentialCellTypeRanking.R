@@ -9,6 +9,8 @@ args <- commandArgs(TRUE)
 
 files=args[1]
 comparisons=[2]
+output_data=[3]
+output_plot=[4]
 
 #import sample file containing unique study sample IDs as the first column ("sample") and the path to the correlation.csv output for each sample in the second column ("path").
 files <- fread(files, header=T)
@@ -29,11 +31,13 @@ for (i in 1:length(dat)){
               
 #combine output
 dat <- do.call(rbind, dat)
+
+#annotate combined output
 dat.anno <- left_join(comparison, dat)
 dat.anno$status <- as.factor(dat.anno$status)
 
 #compare ranks between cases and controls for each cell type
-alltruegroup <- c()
+allcomp <- c()
 cell <- unique(dat.anno$cell_type)
            
 for(i in 1:length(cell)) {
@@ -45,15 +49,36 @@ for(i in 1:length(cell)) {
   df.wilcox <- wilcox_test(df, rank ~ status, ref.group = pheno.counts[2,1]$V1, p.adjust.method="fdr")
   df.mean <- df %>% group_by(status) %>% summarize(Mean = mean(rank, na.rm=TRUE)) %>% as.data.frame()
   df.mean.FC <- df.mean$Mean[2]/df.mean$Mean[1] %>% as.data.frame()
-  print(paste0("foldchange control: ", df.mean[2,1]))
   colnames(df.mean.FC) <- c("foldchange")
-  #df.mean.FC$cell_type_tissue <- cell[i]
   df.mean.FC$cell_type <- cell[i]
   df.all <- cbind(df.wilcox, df.mean.FC)
-  alltruegroup <- rbind(alltruegroup, df.all)
+  allcomp <- rbind(allcomp, df.all)
 }
-  alltruegroup$p.adj <- p.adjust(alltruegroup$p, method="fdr")
-  alltruegroup <- alltruegroup[order(alltruegroup[,10]),]
-  #alltruegroup <- left_join(alltruegroup, comp)
-  alltruegroup$diffexpressed <- "Not Sig"
-  alltruegroup$diffexpressed[alltruegroup$foldchange > 1 & alltruegroup$p.adj < 0.05] <- "Up"
+
+#multiple testing correction
+allcomp$p.adj <- p.adjust(allcomp$p, method="fdr")
+
+#order by p.adj
+allcomp <- allcomp[order(allcomp[,10]),]
+
+#export output
+write.table(alltruegroup, paste0(output_data, "/", labels, ".txt"), sep="\t", col.names=T, row.names=F, quote=F)
+
+#create data label for volcano plot
+allcomp$diffexpressed <- "Not Sig"
+allcomp$diffexpressed[allcomp$foldchange > 1 & allcomp$p.adj < 0.05] <- "Up"
+allcomp$diffexpressed[allcomp$foldchange < 1 & alltruegroup$p.adj < 0.05] <- "Down"
+
+#set colors for volcano plot
+mycolors <- c("#541352FF", "#10a53dFF", "grey80")
+names(mycolors) <- c("Down", "Up", "Not Sig") 
+
+#volcano plot
+ggplot(data=allcomp, aes(x=log2(foldchange), y=-log10(p), color=diffexpressed)) +
+    geom_point() +
+    theme_minimal() +
+    geom_label_repel(data=filter(allcomp, p.adj<0.05), aes(label=cell_type),size=0.05, label.padding = 0.05)+
+    scale_color_manual(values = mycolors)+
+    theme_classic() + ggtitle(labels)
+ggsave(paste0(output_plot, "/", labels, ".pdf"), height=7, width=7)
+              
