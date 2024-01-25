@@ -64,20 +64,23 @@ allcomp <- allcomp[order(allcomp[,10]),]
 #export output
 write.table(alltruegroup, paste0(output_data, "/", labels, ".txt"), sep="\t", col.names=T, row.names=F, quote=F)
 
-#create data label for volcano plot
-allcomp$diffexpressed <- "Not Sig"
-allcomp$diffexpressed[allcomp$foldchange > 1 & allcomp$p.adj < 0.05] <- "Up"
-allcomp$diffexpressed[allcomp$foldchange < 1 & alltruegroup$p.adj < 0.05] <- "Down"
+#create color and labels for volcano plot
+allcomp$diffranked <- "Not Sig"
+allcomp$diffranked[allcomp$foldchange > 1 & allcomp$p.adj < 0.05] <- "Up"
+allcomp$diffranked[allcomp$foldchange < 1 & allcomp$p.adj < 0.05] <- "Down"
 
+allcomp$delabel <- NA
+allcomp[allcomp$diffranked == "Down" | allcomp$diffranked == "Up",]$delabel <- allcomp[allcomp$diffranked == "Down" | allcomp$diffranked == "Up",]$cell_type
+       
 #set colors for volcano plot
 mycolors <- c("#541352FF", "#10a53dFF", "grey80")
 names(mycolors) <- c("Down", "Up", "Not Sig") 
 
 #volcano plot
-ggplot(data=allcomp, aes(x=log2(foldchange), y=-log10(p), color=diffexpressed)) +
+ggplot(data=allcomp, aes(x=log2(foldchange), y=-log10(p), color=diffranked, label=delabel)) +
     geom_point() +
     theme_minimal() +
-    geom_label_repel(data=filter(allcomp, p.adj<0.05), aes(label=cell_type),size=0.05, label.padding = 0.05)+
+    geom_label_repel(size=2)+
     scale_color_manual(values = mycolors)+
     theme_classic() + ggtitle(labels)
 ggsave(paste0(output_plot, "/", labels, ".pdf"), height=7, width=7)
