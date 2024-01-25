@@ -13,7 +13,7 @@ R version 4.1.3
 
 
 ## Data availability
-Whole genome sequencing data can be downloaded from European Genome-Phenome Archive under EGAC00001003120. Nucleosome calls for study samples can be found in data. Gene expression matrix can be found in data. 
+Whole genome sequencing data can be downloaded from European Genome-Phenome Archive under EGAC00001003120. Nucleosome calls for study samples can be found in data.
 
 ## Analysis
 For case-control related analyses, please see the folder case_control
