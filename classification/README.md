@@ -1,3 +1,2 @@
 ## Predictive analysis
-
-`usage:` Rscript loosvm.R <> <> <>
+**usage:** Rscript loosvm.R <> <> <>
