@@ -12,11 +12,11 @@ source(functions)
 
 args <- commandArgs(TRUE)
 
-myseed <- args[1]
-perplexity <- args[2]
-initk <- args[3]
-walksteps <- args[4]
-output_dir <- args[5]
+myseed <- args[1] ##Set seed
+perplexity <- args[2] ##Tsne parameter that balance local and global manifold
+initk <- args[3] ##Number of neareast neighbors to search in community graph construction
+walksteps <- args[4] ##Number of short random walks in Walktrap community detection; it is likely to have more parititions with a smaller walk step
+output_dir <- args[5] ##Output directory
 
 #pivot wider combined data file
 combined <- fread(paste0(output_dir, "/combined_data.txt"), header=T)
