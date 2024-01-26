@@ -1,3 +1,3 @@
 # Predictive analysis
 
-**usage:** Rscript loosvm.R <output_dir> <my_seed> <cost_svm>
+**usage:** Rscript loosvm.R <my_seed> <cost_svm> <output_dir>
