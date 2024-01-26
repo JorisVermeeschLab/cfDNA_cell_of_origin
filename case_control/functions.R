@@ -1,4 +1,4 @@
-plotDifferentialCellTypes <- function(dat output_dir) {
+plotDifferentialCellTypes <- function(dat, output_dir) {
   
   allcomp <- c()
   cell <- unique(dat$cell_type)
