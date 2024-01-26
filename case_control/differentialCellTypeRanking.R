@@ -1,8 +1,9 @@
 library(data.table)
 library(tidyverse)
 library(rstatix)
-library(ggrepel)
 library(ggplot2)
+library(ggrepel)
+
 
 args <- commandArgs(TRUE)
 
