@@ -101,6 +101,7 @@ plotWalkTrapClusterTsne <- function(dat, initk, walksteps, perplexity, output_di
 
   #combine barchart and tsne plot
   pdf(paste0(output_dir, "/walktrap_tsne.pdf"), height=7, width=7)
-  plot_grid(barchart, p1, ncol = 1, rel_heights=c(1,1))
+  print(plot_grid(barchart, p1, ncol = 1, rel_heights=c(1,1)))
   dev.off()
 }
+
