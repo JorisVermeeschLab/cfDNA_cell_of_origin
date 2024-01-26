@@ -1,4 +1,7 @@
 plotDifferentialCellTypes <- function(dat, output_dir) {
+  #' @title Get differentially ranked cell types between cases and controls
+  #' @param dat Input data matrix with combined correlative.csv files for all samples
+  #' @param output_dir Output directory path
   
   allcomp <- c()
   cell <- unique(dat$cell_type)
