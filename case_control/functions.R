@@ -51,7 +51,7 @@ plotDifferentialCellTypes <- function(dat, output_dir) {
   ggsave(paste0(output_dir, "/", labels, ".pdf"), height=7, width=7)
 }
 
-plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, output_dir){
+plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, perplexity, outputdir){
 
   #run pca
   dtmatpca <- prcomp(dtmat)
@@ -69,7 +69,7 @@ plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, output_dir){
   wt.norm <- cluster_walktrap(nw.norm,steps = walksteps)
 
   #run tsne
-  tsne <- Rtsne(dtmat, check_duplicates = FALSE, pca = TRUE, initial_dims = num_PCs, perplexity=10, dims=3)
+  tsne <- Rtsne(dtmat, check_duplicates = FALSE, pca = TRUE, initial_dims = num_PCs, perplexity=perplexity, dims=3)
   embedding <- as.data.frame(tsne$Y)
   embedding$phenotype <- rownames(dtmat)
   embedding <- embedding %>% separate(phenotype, sep=":", into=c("sample", "phenotype"))
@@ -100,7 +100,7 @@ plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, output_dir){
     scale_shape_manual(values = 0:length(unique(wt.norm$membership)))
 
   #combine barchart and tsne plot
-  pdf(paste0(output_dir, "/walktrap_tsne.pdf"), height=7, width=7)
+  pdf(paste0(outputdir, "/walktrap_tsne.pdf"), height=7, width=7)
   plot_grid(barchart, p1, ncol = 1, rel_heights=c(1,1))
   dev.off()
 }
