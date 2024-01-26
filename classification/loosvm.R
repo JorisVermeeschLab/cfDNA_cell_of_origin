@@ -5,9 +5,9 @@ library(pROC)
 
 args <- commandArgs(TRUE)
 
-myseed <- args[1]
-cost <- args[2]
-output_dir <- args[3]
+myseed <- args[1] ##Set seed
+cost <- args[2] ##SVM regularization, cost of constraints
+output_dir <- args[3] ##Output directory
 
 #pivot wider combined data file
 combined <- fread(paste0(output_dir, "/combined_data.txt"), header=T) ##output generated from calldiffrank.R
