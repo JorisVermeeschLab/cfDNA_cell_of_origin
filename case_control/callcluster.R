@@ -12,11 +12,11 @@ source(functions)
 
 args <- commandArgs(TRUE)
 
-output_dir <- args[1]
-perplexity <- args[3]
-initk <- args[4]
-walksteps <- args[5]
-myseed <- args[6]
+myseed <- args[1]
+perplexity <- args[2]
+initk <- args[3]
+walksteps <- args[4]
+output_dir <- args[5]
 
 #pivot wider combined data file
 combined <- fread(paste0(output_dir, "/combined_data.txt"), header=T)
