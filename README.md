@@ -13,7 +13,7 @@ R version 4.1.3
 Sequencing data was demultiplexed, quality checked, and adapters were trimmed using fastp (version 0.12.4). Raw reads were aligned to the human reference genome GRCh38 using the Burrows-Wheeler aligner (version 0.7.17).
 
 ## Data availability
-Whole genome sequencing data can be downloaded from the European Genome-Phenome Archive under EGAC00001003120. Nucleosome calls for study samples can be found in `data`.
+Whole genome sequencing data can be downloaded from the European Genome-Phenome Archive under EGAC00001003120.
 
 ## Analysis
 For case-control related analyses, please see the folder `case_control`
