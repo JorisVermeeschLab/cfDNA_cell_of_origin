@@ -52,7 +52,7 @@ for (x in 1:n_train) {
 }
 
 #export decision values and print performance metrics
-write.table(predres, paste0(output_dir, "svm_loo_decision_values.txt", sep="\t", row.names=F, col.names=T, quote=F)
+write.table(predres, paste0(output_dir, "/svm_loo_decision_values.txt", sep="\t", row.names=F, col.names=T, quote=F)
 svmperfm <- roc(response=alltruegroup,predictor=allpredgroup,ci=TRUE)
 print(svmperfm$auc)
 print(svmperfm$ci)
