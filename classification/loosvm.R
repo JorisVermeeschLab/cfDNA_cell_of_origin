@@ -5,9 +5,9 @@ library(pROC)
 
 args <- commandArgs(TRUE)
 
-output_dir <- args[1]
-myseed <- args[2]
-cost <- args[3]
+myseed <- args[1]
+cost <- args[2]
+output_dir <- args[3]
 
 #pivot wider combined data file
 combined <- fread(paste0(output_dir, "/combined_data.txt"), header=T)
