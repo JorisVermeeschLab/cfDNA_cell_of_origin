@@ -34,7 +34,7 @@ dat <- do.call(rbind, dat)
 #annotate combined output
 dat.anno <- left_join(comparison, dat)
 dat.anno$status <- as.factor(dat.anno$status)
-write.table(dat, paste0(output_dir, "/combined_data.txt"), col.names=T, row.names=F, quote=F, sep="\t")
+write.table(dat.anno, paste0(output_dir, "/combined_data.txt"), col.names=T, row.names=F, quote=F, sep="\t")
               
 #compare ranks between cases and controls for each cell type
 allcomp <- c()
