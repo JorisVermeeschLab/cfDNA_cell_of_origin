@@ -9,7 +9,6 @@ output_dir <- args[1]
 myseed <- args[2]
 cost <- args[3]
 
-
 #pivot wider combined data file
 combined <- fread(paste0(output_dir, "/combined_data.txt"), header=T)
 combined$group <- paste0(combined$sample, ":", combined$status)
@@ -17,6 +16,7 @@ combined.wider <- combined %>% select(-sample, -status) %>% pivot_wider(names_fr
 rownames(combined.wider) <- combined.wider$group
 dtmat <- combined.wider %>% select(-group) %>% data.matrix()
 
+#set seed
 set.seed(myseed)
 
 #set variables
@@ -50,6 +50,8 @@ for (x in 1:n_train) {
   predres <- rbind(predres, data.frame(orgroup[x],attributes(svm.pred)$decision.values))
   print(data.frame(orgroup[x],svm.pred))
 }
+
+#export decision values and print performance metrics
 write.table(predres, paste0(output_dir, "svm_loo_decision_values.txt", sep="\t", row.names=F, col.names=T, quote=F)
 svmperfm <- roc(response=alltruegroup,predictor=allpredgroup,ci=TRUE)
 print(svmperfm$auc)
@@ -59,6 +61,7 @@ print(runacc)
 acclist <- (runacc[1,1]+runacc[2,2])/sum(runacc)
 print(paste0("Accuracy: ", acclist))
 
+#plot ROC curve
 pdf(paste0(output_dir, "/svm_loo_roc.pdf"))
 plot(svmperfm,print.auc=TRUE)
 dev.off()
