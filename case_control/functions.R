@@ -51,7 +51,7 @@ plotDifferentialCellTypes <- function(dat, output_dir) {
   ggsave(paste0(output_dir, "/", labels, ".pdf"), height=7, width=7)
 }
 
-plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, perplexity, outputdir){
+plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, perplexity, output_dir){
 
   #run pca
   dtmatpca <- prcomp(dtmat)
@@ -100,7 +100,7 @@ plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, perplexity, outputd
     scale_shape_manual(values = 0:length(unique(wt.norm$membership)))
 
   #combine barchart and tsne plot
-  pdf(paste0(outputdir, "/walktrap_tsne.pdf"), height=7, width=7)
+  pdf(paste0(output_dir, "/walktrap_tsne.pdf"), height=7, width=7)
   plot_grid(barchart, p1, ncol = 1, rel_heights=c(1,1))
   dev.off()
 }
