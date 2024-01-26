@@ -6,6 +6,11 @@ library(dplyr)
 library(igraph)
 library(FNN)
 library(cowplot)
+script.dir <- "./"
+functions <- file.path(script.dir,"functions.R")
+source(functions)
+
+args <- commandArgs(TRUE)
 
 output_dir <- args[1]
 perplexity <- args[3]
