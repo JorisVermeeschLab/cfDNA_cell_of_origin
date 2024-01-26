@@ -9,9 +9,9 @@ source(functions)
 
 args <- commandArgs(TRUE)
 
-corr_files=args[1] 
-comparisons=args[2]
-output_dir=args[3]
+corr_files=args[1] ##A tab-separated file contains unique sample ID and location of correlation.csv 'sample\tpath'
+comparisons=args[2] ##A tab-separated file contains unique sample ID and case-control status 'sample\tstatus'
+output_dir=args[3] ##Output directory
 
 #import sample file containing unique study sample IDs and the path to the correlation.csv output for each sample.
 corr_files <- fread(files, header=T)
