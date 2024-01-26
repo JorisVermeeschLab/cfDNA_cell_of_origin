@@ -24,3 +24,5 @@ combined$group <- paste0(combined$sample, ":", combined$status)
 combined.wider <- combined %>% select(-sample, -status) %>% pivot_wider(names_from = cell_type, values_from = rank) %>% as.data.frame()
 rownames(combined.wider) <- combined.wider$group
 combined.wider <- combined.wider %>% select(-group) %>% data.matrix()
+
+plotDifferentialCellTypes(combined.wider, )
