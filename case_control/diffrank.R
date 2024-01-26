@@ -38,5 +38,5 @@ dat.anno <- left_join(comparison, dat)
 dat.anno$status <- as.factor(dat.anno$status)
 write.table(dat.anno, paste0(output_dir, "/combined_data.txt"), col.names=T, row.names=F, quote=F, sep="\t")
               
-#compare ranks between cases and controls for each cell type
+#compare ranks between cases and controls for each cell type and visualize as volcano plot
 plotDifferentialCellTypes(dat.anno, output_dir)        
