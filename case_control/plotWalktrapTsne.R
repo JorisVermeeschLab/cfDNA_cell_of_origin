@@ -12,7 +12,6 @@ library(Matrix)
 library(cowplot)
 
 outputdir <- args[1]
-outprefix <- args[2]
 perplexity <- args[3]
 initk <- args[4]
 walksteps <- args[5]
@@ -25,4 +24,5 @@ combined.wider <- combined %>% select(-sample, -status) %>% pivot_wider(names_fr
 rownames(combined.wider) <- combined.wider$group
 combined.wider <- combined.wider %>% select(-group) %>% data.matrix()
 
-plotDifferentialCellTypes(dtmat, myseed, initk, walksteps, perplexity, output_dir)
+set.seed(myseed)
+plotDifferentialCellTypes(dtmat, initk, walksteps, perplexity, output_dir)
