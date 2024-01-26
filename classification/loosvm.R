@@ -10,7 +10,7 @@ cost <- args[2]
 output_dir <- args[3]
 
 #pivot wider combined data file
-combined <- fread(paste0(output_dir, "/combined_data.txt"), header=T)
+combined <- fread(paste0(output_dir, "/combined_data.txt"), header=T) ##output generated from calldiffrank.R
 combined$group <- paste0(combined$sample, ":", combined$status)
 combined.wider <- combined %>% select(-sample, -status) %>% pivot_wider(names_from = cell_type, values_from = rank) %>% as.data.frame()
 rownames(combined.wider) <- combined.wider$group
