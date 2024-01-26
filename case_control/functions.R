@@ -51,10 +51,10 @@ plotDifferentialCellTypes <- function(dat, output_dir) {
   ggsave(paste0(output_dir, "/", labels, ".pdf"), height=7, width=7)
 }
 
-plotWalkTrapClusterTsne <- function(dtmat, initk, walksteps, perplexity, output_dir){
+plotWalkTrapClusterTsne <- function(dat, initk, walksteps, perplexity, output_dir){
 
   #run pca
-  dtmatpca <- prcomp(dtmat)
+  dtmatpca <- prcomp(dat)
   
   #get number of PCs
   eigenvalues <- dtmatpca$sdev^2
