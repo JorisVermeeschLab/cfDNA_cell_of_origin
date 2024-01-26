@@ -3,7 +3,9 @@ library(tidyverse)
 library(rstatix)
 library(ggplot2)
 library(ggrepel)
-
+script.dir <- "./"
+functions <- file.path(script.dir,"functions.R")
+source(functions)
 
 args <- commandArgs(TRUE)
 
