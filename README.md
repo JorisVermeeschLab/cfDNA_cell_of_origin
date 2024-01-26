@@ -18,10 +18,4 @@ Whole genome sequencing data can be downloaded from the European Genome-Phenome 
 ## Analysis
 For case-control related analyses, please see the folder `case_control`
 
-**usage:** Rscript callCluster.R <test_demo_sample_List> <test_demo_label_List> <gipseqcount_option_input> all 1 noscale <testprefix_out> yes <PCs_number> <k_neareast_neighbors_number> <walkstep_number> <seed_number>
-
-**usage:** Rscript callPCAmodel.R <test_demo_sample_List> <test_demo_label_List> <gipseqcount_option_input> all 1 noscale <PCs_number> <performance_output> <model_dir> <model_name> <test_demo_predict_sample_List> <test_demo_predict_label_List> <prediction_output>
-
 For prediction related analyses, please see the folder `classification`
-
-**usage:** Rscript callPCAmodel.R <test_demo_sample_List> <test_demo_label_List> <gipseqcount_option_input> all 1 noscale <PCs_number> <performance_output> <model_dir> <model_name> <test_demo_predict_sample_List> <test_demo_predict_label_List> <prediction_output>
