@@ -25,4 +25,4 @@ rownames(combined.wider) <- combined.wider$group
 combined.wider <- combined.wider %>% select(-group) %>% data.matrix()
 
 set.seed(myseed)
-plotDifferentialCellTypes(dtmat, initk, walksteps, perplexity, output_dir)
+plotWalkTrapClusterTsne(dtmat, initk, walksteps, perplexity, output_dir)
