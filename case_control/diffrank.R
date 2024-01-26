@@ -10,8 +10,8 @@ source(functions)
 args <- commandArgs(TRUE)
 
 corr_files=args[1] 
-comparisons=[2]
-output_dir=[3]
+comparisons=args[2]
+output_dir=args[3]
 
 #import sample file containing unique study sample IDs and the path to the correlation.csv output for each sample.
 corr_files <- fread(files, header=T)
